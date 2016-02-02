@@ -1,0 +1,20 @@
+{
+  "name": "nano-migrate",
+  "version": "1.0.0",
+  "description": "Smartly updates design docs mapped to a folder so you can use your editor of choice and allow your application to keep your views up to date. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "couchdb",
+    "migration",
+    "migrate",
+    "nano"
+  ],
+  "author": "Martin Murphy",
+  "license": "MIT",
+  "dependencies": {
+    "nano": "^6.2.0"
+  }
+}
