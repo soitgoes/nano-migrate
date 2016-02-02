@@ -17,13 +17,21 @@ class Migrator
       id = "_design/" + path.basename(file, '.js')
         
       @db.get id, (err, doc) =>
-        console.log(@baseDirectory, file)
-        absFilePath = path.join(@baseDirectory, file)
-        obj = JSON.parse(fs.readFileSync(absFilePath, 'utf8'))
-        views = JSON.stringify(obj)
+        absFilePath = path.join(@baseDirectory, path.basename(file, '.js'))
+        console.log(absFilePath)
+        obj = require(absFilePath)
+        
+        views = {}
+        for own name, view of obj
+          if (view.map)
+            view.map = view.map.toString()
+          if (view.reduce)
+            view.reduce = view.reduce.toString()
+          views[name] = view
+
         console.log("id", id)
         console.log(views)
-        hasher.update(views, 'utf8')
+        hasher.update(JSON.stringify(views), 'utf8')
         hash = hasher.digest('hex')
         
         if (err)
